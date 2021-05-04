@@ -7,54 +7,91 @@ class Route {
 		window.history.pushState('route', '', '/');
 	}
 
-	// Функция проверки адресной строки при загрузке проверки
+	// Мето проверки адресной строки при загрузке страницы
 	check_pathname() {
-		// Получение текущего пути 
+		// Получение текущего пути
 		let pathname = location.pathname;
 		// Если мы не на главной странице
 		if(pathname != "/") {
+			// Переменная передаваемого пути
+			let path = "";
 			// Находим название нашего пути
 			pathname = pathname.split("/");
+			// Прогон всех элементов пути
+			for (let i = 1; i < pathname.length; i++) {
+				if(pathname.length == 2) path = pathname[i];
+				else path += "/" + pathname[i];
+			}
 			// Переходим на страницу нашего пути
-			route.redirect(pathname[1]);
+			this.redirect(path);
 		// Если на главной
 		} else {
 			// Переходим на главную страницу
-			route.redirect('index');
+			this.redirect('index');
 		}
 	}
 
-	// Метод распределения маршрутов
-	redirect(page) {
+	// Метод перенаправления на нужный маршрут
+	redirect(page, id) {
 		// Путь до страницы
 		let path = "public/spa/pages/" + page + ".html";
+
+		// Вызов функции проверки существования файла
+		// this.check_page(path);
+
 		// Название url строки
 		let url = "/" + page;
+
+		// Если есть id заявки
+		if(id != undefined) url += "/" + id;
 		// Если переходим на главную страницу
-		if(page == "index") url = "/"
+		if(page == "index") url = "/";
+
 		// Вызов метода перенправления на нужную страницу
-		this.route(path, url);
+		this.get_page(path, url);
 	}
 
-	// Перенаправление на нужную страницу с изменением адресной строки
-	// и без перезагрузки страницы
-	route(path, url) {
+	// Получение страницы с изменением адресной строки
+	// без перезагрузки страницы
+	get_page(path, url) {
 		// Изменение маршрута адресной строки
 		window.history.replaceState('route', '', url);
 
 		// AJAX запрос
 		$.ajax({
 			url: path, // путь
-			type: "GET", // метод
 			success: function(data) {
+				// Если всё плохо и путь неправилен
+				if(data.includes("<!DOCTYPE html>")) return route.redirect("404");
 				// Загрузка данных полученной страницы
 				$("#app").html(data);
 			}
 		});
 	}
 
+	// Метод для подключения отдельных небольших файлов к странице
+	attach_module(path, div_id) {
+		// Вызов функции проверки существования файла модуля
+		this.check_module(path, div_id);
+		// AJAX запрос
+		$.ajax({
+			url: path, // путь
+			success: function(data) {
+				// Если всё плохо и путь неправилен
+				if(data.includes("<!DOCTYPE html>"))  {
+					$("#" + div_id).html(`
+						<h1>Ошибка 404</h1>
+						<h3>Такого файла нет</h3>
+					`);
+				}
+				// Загрузка данных в нужный блок
+				$("#"+ div_id).html(data);
+			}
+		});
+	}
+
 	// Метод с AJAX запросом для отправки данных методом get
-	get(data, path, type) {
+	get(data, path) {
 		// AJAX запрос
 		$.ajax({
 			url: path, // путь
@@ -75,7 +112,7 @@ class Route {
 	}
 
 	// Метод с AJAX запросом для отправки данных методом post
-	post(data, path, type) {
+	post(data, path) {
 		// AJAXSetup
 		$.ajaxSetup({
 			// Заголовки
