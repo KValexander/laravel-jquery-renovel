@@ -9,16 +9,15 @@
 	// Если позователь является гостем
 	if(auth.role == "guest") {
 		out += `
-			<a onclick="popup.pagename('login')">Регистрация</a>
-			<a onclick="popup.pagename('register')">Авторизация</a>
+			<a onclick="popup.pagename('login')">Вход</a>
+			<a onclick="popup.pagename('register')">Регистрация</a>
 		`;
 	}
 
 	// Если позователь является администратором или модератором
 	if(auth.role == "admin" || auth.role == "moderator") {
 		out += `
-			<a onclick="popup.pagename('login')">Регистрация</a>
-			<a onclick="popup.pagename('register')">Авторизация</a>
+			<a onclick="popup.redirect('moderation')">Модерирование</a>
 		`;
 	}
 

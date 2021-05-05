@@ -34,6 +34,10 @@ a:not(:hover) {
 	transition: .2s;
 }
 
+a.link {
+	text-decoration: underline;
+}
+
 body {
 	font-family: GardensCMRegular;
 	background-color: #f3f3f3;
@@ -48,10 +52,16 @@ div.content, div#app {
 }
 
 div#app {
-	padding: 20px;
+	padding: 40px;
 	border-radius: 5px;
 	background-color: white;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
 	box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+div#app h1 {
+	margin-bottom: 10px;
 }
 
 input {
@@ -62,7 +72,7 @@ input {
 	font-family: GardensCMRegular;
 }
 
-input[type=button] {
+input[type=button], input[type=submit] {
 	color: white;
 	border: none;
 	padding: 0 20px;
@@ -70,8 +80,9 @@ input[type=button] {
 	background-color: #1d8eea;
 }
 
-div#app h1 {
-	margin-bottom: 10px;
+form input {
+	width: 100%;
+	margin: 10px 0;
 }
 
 /* Стили шапки сайта
@@ -89,7 +100,6 @@ header div.logo {
 	width: 300px;
 	float: left;
 }
-
 header div.logo img {
 	height: 60px;
 	margin-right: 10px;
@@ -98,6 +108,7 @@ header div.logo img {
 
 header div.logo h1 {
 	font-size: 40pt;
+	cursor: pointer;
 	line-height: 60px;
 }
 
@@ -123,16 +134,81 @@ header nav a:not(:hover) {
 /* Стили контентной части сайта
 ==============================*/
 
+/* Стили pop-up модулей
+==============================*/
+
+
 /* Функциональные стили
 ==============================*/
 
 div.error {
-	padding: 20px;
 	font-size: 20pt;
 }
 
 div.error h1 {
 	margin-bottom: 30px;
+}
+
+div#mask {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 98;
+	width: 100%;
+	height: 100%;
+	opacity: 0.3;
+	display: none;
+	background-color: black;
+}
+
+div#popup {
+	z-index: 99;
+	width: 600px;
+	min-height: 10px;
+	display: none;
+	padding: 30px;
+	margin: 0 auto;
+	text-align: center;
+	position: absolute;
+	border-radius: 5px;
+	top: calc(50% - 200px);
+	left: calc(50% - 300px);
+	background-color: white;
+	border: solid 3px #1d8eea;
+	box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+div#popup:not(:hover) {
+	transition: .2s;
+}
+
+div#popup h1 {
+	text-align: left;
+}
+
+div#popup hr {
+	margin: 10px 0;
+}
+
+div#popup_close {
+	position: absolute;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	display: none;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	background-color: red;
+}
+
+div#popup_close:hover {
+	transition: .2s;
+	background-color: #1d8eea;
+}
+
+div#popup_close:not(:hover) {
+	transition: .2s;
 }
 
 div#loading_screen {

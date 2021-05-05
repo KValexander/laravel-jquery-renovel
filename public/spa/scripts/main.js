@@ -9,7 +9,7 @@ $(function() {
 
 		// Вызов функции сокрытия экрана загрузки
 		hide_ls();
-	}, 200);
+	}, 250);
 
 });
 
@@ -25,4 +25,9 @@ let hide_ls = function() {
 		case 4: $("#loading_screen").slideUp(200); break;
 		default: $("#loading_screen").fadeOut(200); break;
 	};
+}
+
+// Функция посимвольного вывода текста на экран
+function gradual_text_out(arr_text, id_element) {
+	
 }
