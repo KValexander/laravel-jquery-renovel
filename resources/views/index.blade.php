@@ -12,9 +12,14 @@
 
 	<!-- Подключение библиотеки jquery -->
 	<script src="{{ asset('public/spa/library/jquery-3.6.0.min.js') }}"></script>
-
 	<!-- Подключение класса маршрутизации -->
 	<script src="{{ asset('public/spa/route.js') }}"></script>
+	<!-- Подключение класса проверок авторизации -->
+	<script src="{{ asset('public/spa/auth.js') }}"></script>
+	<!-- Подключение объекта работы с popup окном -->
+	<script src="{{ asset('public/spa/scripts/popup.js') }}"></script>
+	<!-- Подключение файла основного скрипта -->
+	<script src="{{ asset('public/spa/scripts/main.js') }}"></script>
 
 </head>
 <body>
@@ -24,17 +29,19 @@
 				<img src="{{ asset('public/spa/images/logo.png') }}" alt="">
 				<h1>Novel: re</h1>
 			</div>
-			<nav>
-				<a onclick="route.redirect('index')">Главная</a>
-				<a onclick="route.redirect('novels')">Визуальные новеллы</a>
-				<a onclick="route.redirect('register')">Регистрация</a>
-				<a onclick="route.redirect('login')">Авторизация</a>
+			<nav id="menu">
 			</nav>
 		</div>
 	</header>
 
 	<!-- Блок, в который будет загружаться вся контентная часть страницы -->
 	<div id="app"></div>
+
+	<!-- Подключаемый модуль для popup окна -->
+	<div id="popup"></div>
+
+	<!-- Блок для экрана загрузки -->
+	<div id="loading_screen"></div>
 
 </body>
 </html>

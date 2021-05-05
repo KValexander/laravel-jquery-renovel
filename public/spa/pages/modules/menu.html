@@ -1,0 +1,35 @@
+<!-- Модуль вывода меню -->
+<script>
+	// Основные пункты меню
+	out = `
+		<a onclick="route.redirect('index')">Главная</a>
+		<a onclick="route.redirect('novels')">Визуальные новеллы</a>
+	`;
+
+	// Если позователь является гостем
+	if(auth.role == "guest") {
+		out += `
+			<a onclick="popup.pagename('login')">Регистрация</a>
+			<a onclick="popup.pagename('register')">Авторизация</a>
+		`;
+	}
+
+	// Если позователь является администратором или модератором
+	if(auth.role == "admin" || auth.role == "moderator") {
+		out += `
+			<a onclick="popup.pagename('login')">Регистрация</a>
+			<a onclick="popup.pagename('register')">Авторизация</a>
+		`;
+	}
+
+	// Если позователь не является гостем, т.е авторизован
+	if(auth.role != "guest") {
+		out += `
+			<a onclick="route.redirect('personal_area')">Личный кабинет</a>
+			<a onclick="auth.logout()">Выход</a>
+		`;
+	}
+
+	// Вывод данных на страницу
+	$("#menu").html(out);
+</script>
