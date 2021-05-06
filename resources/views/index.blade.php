@@ -27,7 +27,7 @@
 		<div class="content">
 			<div class="logo">
 				<img src="{{ asset('public/spa/images/logo.png') }}" alt="">
-				<h1>Novel: re</h1>
+				<h1 onclick="route.redirect('index')">Novel: re</h1>
 			</div>
 			<nav id="menu">
 			</nav>
@@ -39,6 +39,10 @@
 
 	<!-- Подключаемый модуль для popup окна -->
 	<div id="popup"></div>
+	<!-- Элемент закрытия popup окна -->
+	<div id="popup_close"></div>
+	<!-- Маска для заднего фона при включении popup окна -->
+	<div id="mask"></div>
 
 	<!-- Блок для экрана загрузки -->
 	<div id="loading_screen"></div>
