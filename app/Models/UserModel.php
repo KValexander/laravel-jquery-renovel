@@ -12,6 +12,23 @@ class UserModel extends Model
     protected $table = "users";
     protected $primaryKey = "user_id";
 
+    protected $fillable = [
+        "user_id",
+        "username",
+        "email",
+        "login",
+        "title",
+        "password",
+        "remember_token",
+        "d_role_id",
+        "user_status",
+        "about",
+        "online",
+        "status",
+        "ban",
+        "delete_marker"
+    ];
+
     // Получение комментариев пользователя
     public function comments() {
     	return $this->hasMany("App\Models\CommentModel", "user_id");
@@ -19,7 +36,7 @@ class UserModel extends Model
 
     // Получение роли пользователя
     public function role() {
-    	return $this->hasOne("App\Models\DRoleModel", "d_role_id");
+    	return $this->belongsTo("App\Models\DRoleModel", "d_role_id");
     }
 
     // Получение новел добавленных в закладки

@@ -16,7 +16,7 @@ class SessionController extends Controller
 		$data = (object)[
 			"code" => "200",
 			"data" => (object)[
-				"auth" => session("auth"),
+				"token" => session("token"),
 				"user_id" => session("user_id"),
 				"role" => session("role"),
 			],

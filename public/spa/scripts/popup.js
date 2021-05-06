@@ -24,6 +24,10 @@ let popup = {
 			case("register"):
 				this.path = "public/spa/pages/modules/register.html";
 				break;
+			// Сообщение об успешной регистрации
+			case("reg_access"):
+				this.path = "public/spa/pages/modules/reg_access.html";
+				break;
 		}
 		// Вызов функции загрузки контента в pop-up окно
 		route.attach_module(this.path, "popup");
@@ -42,7 +46,7 @@ let popup = {
 		let innWidth = $("#popup").innerWidth();
 		let innHeight = $("#popup").innerHeight();
 		// Изменение отступов слева и сверху для центрирования окна
-		let top = `calc(50% - ${ innHeight / 1.5 }px)`;
+		let top = `calc(50% - ${ innHeight / 1.7 }px)`;
 		let left = `calc(50% - ${ innWidth / 2 }px)`;
 		// Присваивание стилей
 		$("#popup").css({
@@ -51,7 +55,7 @@ let popup = {
 		});
 
 		// Отступы для элемента закрытия pop-up окна
-		top = `calc(50% - ${ innHeight / 1.5 + 15 }px)`;
+		top = `calc(50% - ${ innHeight / 1.7 + 15 }px)`;
 		left = `calc(50% + ${ innWidth / 2 - 10 }px)`;
 		// Присваивание стилей
 		$("#popup_close").css({
@@ -84,6 +88,15 @@ let popup = {
 		// Изменение состояния pop-up окна
 		this.popup_state = false;
 	},
+
+	// Функция вывода небольшого всплывающего сообщения
+	message: function() {
+
+	},
+	// Функция сокрытия небольшого всплывающего сообщения
+	message_hide: function() {
+
+	}
 };
 
 // Постоянное обновление координат мыши для объекта popup

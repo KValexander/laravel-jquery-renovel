@@ -38,6 +38,10 @@ a.link {
 	text-decoration: underline;
 }
 
+p.error {
+	color: red;
+}
+
 body {
 	font-family: GardensCMRegular;
 	background-color: #f3f3f3;
@@ -83,6 +87,15 @@ input[type=button], input[type=submit] {
 form input {
 	width: 100%;
 	margin: 10px 0;
+}
+
+form input.error {
+	border: solid 1px red;
+	box-shadow: 0 0 3px rgba(255,0,0,0.5);
+}
+
+form input.error:not(:hover) {
+	transition: .2s;
 }
 
 /* Стили шапки сайта
@@ -136,6 +149,10 @@ header nav a:not(:hover) {
 
 /* Стили pop-up модулей
 ==============================*/
+
+div.reg_access, div.register p, div.login p {
+	text-align: left;
+}
 
 
 /* Функциональные стили
@@ -195,15 +212,19 @@ div#popup_close {
 	z-index: 100;
 	top: 0;
 	left: 0;
-	display: none;
 	width: 30px;
 	height: 30px;
+	display: none;
 	cursor: pointer;
+	border-radius: 5px;
 	background-color: red;
+	background: url("../images/ex_red.jpg");
+	background-size: 100% 100%;
 }
 
 div#popup_close:hover {
 	transition: .2s;
+	background: url("../images/ex_blue.jpg");
 	background-color: #1d8eea;
 }
 

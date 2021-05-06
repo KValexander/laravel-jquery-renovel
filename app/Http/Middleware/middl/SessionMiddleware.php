@@ -4,6 +4,7 @@ namespace App\Http\Middleware\middl;
 
 use Closure;
 use Illuminate\Http\Request;
+use DB;
 
 class SessionMiddleware
 {
@@ -16,19 +17,24 @@ class SessionMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // Если пользователь имеет значение авторизации 
-        if(session("auth")) {
-            // Если значение авторизации равно неавторизованности
-            if(session("auth") == false) {
+        // Если пользователь имеет токен 
+        if(session("token")) {
+            // Получение токена авторизованного пользователя
+            $token = DB::table("users")
+                ->where("user_id", "=", session("user_id"))
+                ->select("remember_token")
+                ->first();
+            // Если значение токена сессии не совпадает со значением токена в базе данных
+            if(session("token") != $token->token) {
                 // Прописываю значения неавторизованного пользователя в сессии
-                session(["auth" => "false"]);
+                session(["token" => "0"]);
                 session(["user_id" => 0]);
                 session(["role" => "guest"]);
             }
-        // Если пользователь не имеет значения авторизации
+        // Если пользователь не имеет токена
         } else {
             // Прописываю значения неавторизованного пользователя в сессии
-            session(["auth" => "false"]);
+            session(["token" => "0"]);
             session(["user_id" => 0]);
             session(["role" => "guest"]);
         }
