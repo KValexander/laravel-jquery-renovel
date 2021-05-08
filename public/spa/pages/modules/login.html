@@ -1,14 +1,11 @@
-<script>
-</script>
-
 <div class="login">
 	<h1>Вход</h1>
 	<hr>
-	<form id="login_form">
+	<form id="login_form" onsubmit="return auth.login()">
 		<p class="error" id="login_error"></p>
 		<input type="text" placeholder="Логин" name="login">
 		<input type="password" placeholder="Пароль" name="password">
-		<input type="button" value="Войти" onclick="auth.login()">
+		<input type="submit" value="Войти">
 	</form>
 	<nav>
 		<a class="link">Забыли пароль?</a> или

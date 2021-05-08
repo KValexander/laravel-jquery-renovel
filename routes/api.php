@@ -9,10 +9,8 @@ use App\Http\Controllers\api\MainController;
 // Подключение single контроллеров
 use App\Http\Controllers\single\SessionController;
 use App\Http\Controllers\single\AuthController;
+use App\Http\Controllers\single\UserController;
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 // Ко все маршрутам в файле api.php добавляется префикс /api
 
@@ -20,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(["middleware" => ["session"]], function() {
 
 	// Маршруты для обычных контроллеров
-	// Получение сессии
+	// Получение сессии (не используется)
 	Route::get("/session", [SessionController::class, "session"]);
 
 	// Регистрация
@@ -36,6 +34,11 @@ Route::group(["middleware" => ["session"]], function() {
 	// Группа маршрутов с проверкой на авторизацию
 	Route::group(["middleware" => ["auth"]], function() {
 
+		// Личный кабинет
+		Route::post("/personal_area", [UserController::class, "personal_area"]);
+		// Страница пользователя
+		Route::get("/user", [UserController::class, "user"]);
+		
 	});
 
 });

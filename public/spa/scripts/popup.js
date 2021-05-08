@@ -32,7 +32,7 @@ let popup = {
 		// Вызов функции загрузки контента в pop-up окно
 		route.attach_module(this.path, "popup");
 		// Вызов функции отображения окна
-		setTimeout(this.show, 10);
+		setTimeout(this.show, 100);
 	},
 
 	// Функция отображения pop-up окна
@@ -90,12 +90,48 @@ let popup = {
 	},
 
 	// Функция вывода небольшого всплывающего сообщения
-	message: function() {
+	message: function(message, color) {
+		// Отступы
+		let left = (this.winInnWidth - 310) + "px";
+		let top = "10px";
+		// Добавление стилей
+		$("#message").css({
+			"left": left,
+			"top": top,
+			"border": "solid 2px " + color,
+		});
+		// Добавление контента в сообщение
+		$("#message").html("<p>" + message + "</p><div></div>");
+		// Линия сокращения времени вывода сообщения
+		$("#message div").css({
+			"position": "relative",
+			"top": "5px",
+			"height": "5px",
+			"width": "100%",
+			"border-radius": "5px",
+			"background-color": "orange",
+		});
 
+		// Открытие сообщения
+		$("#message").fadeIn(200, function() {
+			$("#message div").animate({
+				width: "0px",
+			}, 5000);
+			$(this).click(function() {
+				popup.message_hide();
+			});
+		});
+
+		// Скрытие сообщения через 5 секунд
+		setTimeout(popup.message_hide, 5000);
 	},
-	// Функция сокрытия небольшого всплывающего сообщения
-	message_hide: function() {
 
+	// Функция скрытия окна сообщения
+	message_hide: function() {
+		// Скрытие окна сообщения
+		$("#message").fadeOut(200, function() {
+			$(this).html("");
+		});
 	}
 };
 

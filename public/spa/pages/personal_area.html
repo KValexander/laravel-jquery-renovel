@@ -1,1 +1,75 @@
-<h1>Личный кабинет</h1>
+<script>
+	// Проверка на авторизацию
+	auth.auth_check(function() {
+		// Получение данных пользователя
+		query.personal_area(function(data) {
+			// Вывод данных пользователя
+			out = ``;
+			$(".personal_area .wrap").append(out);
+
+			// Вывод роли пользователя
+			$(".sidebar p.role b").html(data.data.role.role);
+		});
+
+		// Скрытие контента табов
+		$(".wrap .tab_content").each(function() { $(this).css("display", "none"); })
+		// Открытие первого таба
+		$(".wrap .tab_content").eq(0).fadeIn(100);
+		// Табуляция страницы
+		$(".tabs div").click(function() {
+			// Очистка стилей
+			$(".tabs div").each(function() { $(this).removeClass("active");});
+			// Скрытие контента табов
+			$(".wrap .tab_content").each(function() { $(this).css("display", "none"); });
+			// Номер нажатого дива
+			let index = $(this).index();
+			// Открытие контента нажатого таба
+			$(".wrap .tab_content").eq(index).fadeIn(200);
+			// Присваивание стилей
+			$(this).addClass("active");
+		});
+
+	});
+
+</script>
+
+<!-- Сайдбар -->
+<div class="sidebar">
+	<p class="role">Вы вошли как <b></b>. <a onclick="auth.logout()">Выйти</a></p>
+	<nav>
+		<a>Обновить информацию</a>
+	</nav>
+</div>
+
+<!-- Личный кабинет -->
+<div class="personal_area">
+	<!-- Табуляция -->
+	<nav class="tabs">
+		<div class="active">Страница</div>
+		<div>Комментарии</div>
+		<div>Избранное</div>
+		<div>На модерации</div>
+		<div>Добавленное</div>
+	</nav>
+
+	<!-- Обёртка для контента -->
+	<div class="wrap">
+		<div class="tab_content">
+			<h1>Информация о пользователе</h1>
+		</div>
+		<div class="tab_content">
+			<h1>Комментарии</h1>
+		</div>
+		<div class="tab_content">
+			<h1>Избранные новеллы</h1>
+		</div>
+		<div class="tab_content">
+			<h1>Новеллы на модерации</h1>
+		</div>
+		<div class="tab_content">
+			<h1>Добавленные новеллы</h1>
+		</div>
+	</div>
+</div>
+
+<script>height_sidebar();</script>

@@ -7,13 +7,13 @@ let gto = {
 	el_out: "", // элемент для вывода символов
 	arr_lines: [], // массив текста
 	arr_symbols: [], // массив с символами линнии
-	state: false, // состояние работы
+	gto_state: false, // состояние работы
 	// Функция первичной работы с текстом
 	receiving_text: function(arr_lines, element_id) {
 		// Если состояние работы активное, то не начинаем работу
-		if (gto.state == true) return;
+		if (gto.gto_state == true) return;
 		// Начинаем работу
-		gto.state = true;
+		gto.gto_state = true;
 
 		// Получение количества линий текста
 		gto.count_line = arr_lines.length;
@@ -26,7 +26,7 @@ let gto = {
 	// Функция работы с последовательностью вывода
 	work_with_sequence: function(s) {
 		// Если количество линий закончилось, то заканчиваем работу кода
-		if(gto.current_line >= gto.count_line) return gto.state = false;
+		if(gto.current_line >= gto.count_line) return gto.gto_state = false;
 
 		// Получение символов строки
 		gto.arr_symbols = gto.arr_lines[gto.current_line].split("");

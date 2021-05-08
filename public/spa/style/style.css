@@ -58,14 +58,25 @@ div.content, div#app {
 div#app {
 	padding: 40px;
 	border-radius: 5px;
+	min-height: 40px;
 	background-color: white;
+	overflow: hidden;
 	border-top-left-radius: 0px;
 	border-top-right-radius: 0px;
 	box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 
 div#app h1 {
-	margin-bottom: 10px;
+	margin-bottom: 10px;/*
+	padding-bottom: 10px;
+	border-bottom: solid 3px #1d8eea;*/
+}
+
+div#app div.sidebar {
+	float: right;
+	width: 30%;
+	border-radius: 5px;
+	margin-left: 30px;
 }
 
 input {
@@ -96,6 +107,11 @@ form input.error {
 
 form input.error:not(:hover) {
 	transition: .2s;
+}
+
+form input.error[type=button], form input.error[type=submit] {
+	box-shadow: none;
+	border: none;
 }
 
 /* Стили шапки сайта
@@ -147,6 +163,60 @@ header nav a:not(:hover) {
 /* Стили контентной части сайта
 ==============================*/
 
+/* Стили личного кабинета
+==============================*/
+div.sidebar {
+	background-color: white;
+	text-align: right;
+}
+
+div.sidebar p.role {
+	text-align: right;
+	margin-bottom: 20px;
+	padding-bottom: 10px;
+	border-bottom: solid 3px #1d8eea;
+	box-shadow: 0px 1px 0px rgba(0,0,0,0.3);
+}
+
+div.sidebar nav {
+	padding: 20px;
+	margin: 10px 0;
+	text-align: center;
+	border-radius: 3px;
+	box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+div.personal_area {
+	width: calc(70% - 30px);
+}
+
+div.personal_area nav {
+	text-align: center;
+	overflow: hidden;
+}
+
+div.personal_area nav div {
+	float: left;
+	min-width: 100px;
+	border-top: solid 3px white;
+	cursor: pointer;
+	background-color: white;
+	padding: 15px;
+}
+
+div.personal_area nav div.active {
+	transition: .2s;
+	color: #1d8eea;
+	border-top: solid 3px #1d8eea;
+}
+
+div.personal_area div.wrap {
+	padding: 20px 0;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+
 /* Стили pop-up модулей
 ==============================*/
 
@@ -178,7 +248,7 @@ div#mask {
 	background-color: black;
 }
 
-div#popup {
+div#popup, div#message {
 	z-index: 99;
 	width: 600px;
 	min-height: 10px;
@@ -230,6 +300,14 @@ div#popup_close:hover {
 
 div#popup_close:not(:hover) {
 	transition: .2s;
+}
+
+div#message {
+	z-index: 100;
+	width: 300px;
+	padding: 10px;
+	cursor: pointer;
+	border: solid 3px #1d8eea;
 }
 
 div#loading_screen {

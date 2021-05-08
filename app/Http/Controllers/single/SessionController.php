@@ -4,14 +4,12 @@ namespace App\Http\Controllers\single;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-// Подключение ресурсов
-use App\Http\Resources\SessionResource;
+use Illuminate\Support\Facades\Cookie;
 
 class SessionController extends Controller
 {
 	// Функция передачи данных сессии
-	public function session() {
+	public function Session(Request $request) {
 		// Составление массива данных
 		$data = (object)[
 			"code" => "200",

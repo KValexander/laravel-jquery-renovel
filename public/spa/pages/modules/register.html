@@ -1,7 +1,7 @@
 <div class="register">
 	<h1>Регистрация</h1>
 	<hr>
-	<form id="register_form">
+	<form id="register_form" onsubmit="return auth.register()">
 		<p class="error" id="username"></p>
 		<input type="text" placeholder="Имя пользователя" name="username">
 		<p class="error" id="email"></p>
@@ -12,7 +12,7 @@
 		<input type="password" placeholder="Пароль" name="password">
 		<p class="error" id="password_check"></p>
 		<input type="password" placeholder="Подтверждение пароля" name="password_check">
-		<input type="button" value="Зарегистрироваться" onclick="auth.register()">
+		<input type="submit" value="Зарегистрироваться">
 	</form>
 	<nav>
 		Вы уже зарегистрированы?

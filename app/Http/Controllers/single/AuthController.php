@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -79,13 +80,14 @@ class AuthController extends Controller
 
 		// Если пользователь не был найден
 		if(empty((array)$user)) {
+			// Отрицательный ответ
 			return response()->json(
-		        $data = [
+				$data = [
 		            "error" => [
 		                "code" => "403",
-		                "message" => "Ошибка логина или пароля 1",
-		            ],
-		        ], 403);
+		                "message" => "Ошибка логина или пароля",
+		           	]
+	            ], 403);
 		}
 
 		// Проверка пароля
@@ -96,37 +98,33 @@ class AuthController extends Controller
 			$user = UserModel::find($user->user_id);
 			// Запись токена в базу
 			$user->remember_token = $token;
+			// Если пользователь заходит впервые, то активируем его статус
+			if($user->status == 0) $user->status = 1;
+			// Сохраняем данные в базу
 			$user->save();
 
-			// Получение роли пользователя (не работает)
-			$role = UserModel::find($user->user_id)->role()->first();
-			
-			// Запись данных в сессии
-			session(["token" => $token]);
-			session(["user_id" => $user->user_id]);
-			session(["role" => $role->code]);
+			// Получение роли пользователя
+			$role = $user->role()->select("code")->first();
 
-			// Отправка положительного ответа
-			return response()->json(
-				$data = [
-					"data" => [
-						"token" => $token
-					],
-				], 200);
+			// Положительный ответ
+			$data = [
+				"data" => [
+					"token" => $token,
+					"user_id" => $user->user_id,
+					"role" => $role->code
+				],
+			]; $code = 200;
 		} else {
-			// Отправка отрицательного ответа
-			return response()->json(
-		        $data = [
-		            "error" => [
-		                "code" => "403",
-		                "message" => "Ошибка логина или пароля 2",
-		            ],
-		        ], 403);
+			// Отрицательный ответ
+	        $data = [
+	            "error" => [
+	                "code" => "403",
+	                "message" => "Ошибка логина или пароля",
+	            ],
+	        ]; $code = 403;
 		}
-	}
 
-	// Функция выхода из авторизации
-	public function logout(Request $request) {
-
+		// Отправка ответа
+		return response()->json($data, $code);
 	}
 }

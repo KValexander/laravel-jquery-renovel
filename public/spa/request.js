@@ -9,9 +9,10 @@ class Request {
 			headers: {
 				// Токен формы
 				"X-CSRF-TOKEN": $("meta[meta='_token']").attr("content"),
+				// Тип данных
+				"Content-Type": "application/json",
 				// Токен авторизации
-				"Authorization": "Bearer " + auth.token,
-				// "Content-Type": "application/json",
+				Authorization: "Bearer " + auth.auth.token,
 			}
 		});
 	}
@@ -45,7 +46,6 @@ class Request {
 	post(callback, data, url) {
 		// Установка заголовков для ajax запроса
 		this.setup();
-
 		// AJAX запрос
 		$.ajax({
 			url: url, // путь
@@ -57,7 +57,6 @@ class Request {
 			// В случае успеха
 			success: function(data) {
 				// Возвращение данных
-				// return data;
 				callback(data);
 			},
 			// В случае неудачи
