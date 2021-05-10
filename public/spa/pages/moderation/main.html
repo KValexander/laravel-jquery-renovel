@@ -1,0 +1,84 @@
+<script>
+	// Проверка пользователя наличие административной роли
+	auth.moderation_check(function() {
+		// Вывод роли пользователя
+		$(".sidebar p.role b").html(auth.auth.role);
+
+		// Запрос на получение данных для страницы модерации
+		query.moderation_page(function(data) {
+
+			// Вызов функции вывода пользователей
+			users_out(data.users);
+
+		});
+
+		// Поиск пользователей
+		$("input[type=search]").on("input", function(e) {
+			// e.target = $(this)
+			// Поиск по имени
+			// Поиск по id
+			// Поиск по 
+		});
+	});
+
+	// Функция вывода пользователей
+	function users_out(data) {
+		console.log(data);
+
+		// Очистка переменной
+		out = `
+			<div class="user">
+				<div class="head">
+					<div>id</div>
+					<div>username</div>
+					<div>email</div>
+					<div>login</div>
+				</div>`;
+
+		// Конкатинация данных
+		for(let val in data) {
+			out += `
+					<div class="body">
+						<div class="id"></div>
+						<div class="username"></div>
+						<div class="email"></div>
+						<div class="login"></div>
+					</div>
+			`;
+			console.log(data[val]);
+		}
+
+		out += `</div>`;
+
+		// Вывод данных
+		$("#users").html(out);
+	}
+</script>
+
+<!-- Сайдбар -->
+<div class="sidebar">
+	<!-- Меню сайдбара -->
+	<nav>
+		<p><a>Страница справочников</a></p>
+		<p><a>Модерирование новелл</a></p>
+		<p><a>Добавить новеллу</a></p>
+	</nav>
+</div>
+
+<!-- Страница модерации -->
+<div class="moderation">
+	<h1>Страница модерации</h1>
+
+	<!-- Пользователи -->
+	<h2>Пользователи</h2>
+	<!-- Поиск пользователей -->
+	<div class="search">
+		<input type="search" placeholder="Введите id/имя/email/логин пользователя">
+	</div>
+	<!-- Вывод информации о пользователях -->
+	<div id="users">
+	</div>
+</div>
+
+<script>height_sidebar();</script>
+

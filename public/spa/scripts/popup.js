@@ -26,7 +26,7 @@ let popup = {
 				break;
 			// Сообщение об успешной регистрации
 			case("reg_access"):
-				this.path = "public/spa/pages/modules/reg_access.html";
+				this.path = "public/spa/pages/modules/mess/reg_access.html";
 				break;
 		}
 		// Вызов функции загрузки контента в pop-up окно
@@ -109,7 +109,7 @@ let popup = {
 			"height": "5px",
 			"width": "100%",
 			"border-radius": "5px",
-			"background-color": "orange",
+			"background-color": "#ff9a0f",
 		});
 
 		// Открытие сообщения

@@ -28,6 +28,7 @@ class Request {
 			method: "GET", // метод
 			cache: false, // отсутсвие кеша
 			// contentType: "application/json", // тип данных
+    		processData: false, // отмена обработки данных
 			data: data, // отправляемые данные
 			// В случае успеха
 			success: function(data) {

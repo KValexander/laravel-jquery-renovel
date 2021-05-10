@@ -38,9 +38,10 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
-            // Свои middleware, подключение для работы сессий
+            // Свои middleware, подключение для работы сессий (всё равно не работает, потому что api)
             \App\Http\Middleware\middl\SessionMiddleware::class,
             // \App\Http\Middleware\middl\AuthMiddleware::class,
+            // \App\Http\Middleware\middl\ModerationMiddleware::class,
         ],
 
         'api' => [
@@ -70,5 +71,6 @@ class Kernel extends HttpKernel
         // Свои middleware
         'session' => \App\Http\Middleware\middl\SessionMiddleware::class,
         'auth' => \App\Http\Middleware\middl\AuthMiddleware::class,
+        'moderation' => \App\Http\Middleware\middl\ModerationMiddleware::class,
     ];
 }

@@ -20,6 +20,14 @@ let query = {
 	// Для страницы другого пользователя
 	user_page: function(id) {
 
+	},
+
+	// Запрос на получение данных для страницы модерации
+	moderation_page: function(callback) {
+		// Запрос
+		request.get(function(data) {
+			callback(data);
+		}, null, "api/moderation/main") 
 	}
 
 };

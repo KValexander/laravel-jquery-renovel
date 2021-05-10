@@ -5,7 +5,7 @@ namespace App\Http\Middleware\middl;
 use Closure;
 use Illuminate\Http\Request;
 
-class AuthMiddleware
+class ModerationMiddleware
 {
     /**
      * Handle an incoming request.

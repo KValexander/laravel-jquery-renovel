@@ -23,15 +23,11 @@ a {
 	color: black;
 	cursor: pointer;
 	text-decoration: none;
+	transition: .2s;
 }
 
 a:hover {
-	transition: .2s;
 	color: #1d8eea;
-}
-
-a:not(:hover) {
-	transition: .2s;
 }
 
 a.link {
@@ -102,11 +98,8 @@ form input {
 
 form input.error {
 	border: solid 1px red;
-	box-shadow: 0 0 3px rgba(255,0,0,0.5);
-}
-
-form input.error:not(:hover) {
 	transition: .2s;
+	box-shadow: 0 0 3px rgba(255,0,0,0.5);
 }
 
 form input.error[type=button], form input.error[type=submit] {
@@ -148,22 +141,18 @@ header nav {
 
 header nav a {
 	padding: 15px 10px;
+	transition: .2s;
 	border-bottom: solid 1px black;
 }
 
 header nav a:hover {
-	transition: .2s;
 	border-bottom: solid 1px #1d8eea;
-}
-
-header nav a:not(:hover) {
-	transition: .2s;
 }
 
 /* Стили контентной части сайта
 ==============================*/
 
-/* Стили личного кабинета
+/* Стили сайдбара
 ==============================*/
 div.sidebar {
 	background-color: white;
@@ -179,13 +168,40 @@ div.sidebar p.role {
 }
 
 div.sidebar nav {
-	padding: 20px;
+	transition: .2s;
+	padding: 10px;
 	margin: 10px 0;
-	text-align: center;
 	border-radius: 3px;
-	box-shadow: 0 0 5px rgba(0,0,0,0.3);
+	/*box-shadow: 0 0 5px rgba(0,0,0,0.3);*/
 }
 
+div.sidebar nav h2 {
+	transition: .2s;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+div.sidebar nav p {
+	padding: 20px 0;
+	border-right: solid 5px #1d8eea;
+	border-left: solid 3px white;
+	transition: .2s;
+	border-radius: 5px;
+}
+
+div.sidebar nav p:hover {
+	border-right: solid 5px #ff9a0f;
+	border-left: solid 3px #ff9a0f;
+	background-color: #fcfcfc;
+	color: white;
+}
+
+div.sidebar nav p a {
+	padding-right: 10px;
+}
+
+/* Стили личного кабинета
+==============================*/
 div.personal_area {
 	width: calc(70% - 30px);
 }
@@ -216,10 +232,37 @@ div.personal_area div.wrap {
 	border-bottom-right-radius: 5px;
 }
 
+/* Стили страницы модерации
+==============================*/
+div.moderation {
+	width: calc(70% - 30px);
+}
+
+div.moderation h2 {
+	padding: 20px 0 10px 0;
+}
+
+div.moderation div.search {
+	margin: 10px 0;
+}
+
+div.moderation div.search input[type=search]{
+	width: 100%;
+}
+
+div.moderation div#users {
+	width: 100%;
+	min-height: 10px;
+	border: solid 1px black;
+}
+
+div.moderation div#users div.user {
+	overflow: hidden;
+}
+
 
 /* Стили pop-up модулей
 ==============================*/
-
 div.reg_access, div.register p, div.login p {
 	text-align: left;
 }
@@ -227,7 +270,6 @@ div.reg_access, div.register p, div.login p {
 
 /* Функциональные стили
 ==============================*/
-
 div.error {
 	font-size: 20pt;
 }
@@ -252,6 +294,7 @@ div#popup, div#message {
 	z-index: 99;
 	width: 600px;
 	min-height: 10px;
+	transition: .2s;
 	display: none;
 	padding: 30px;
 	margin: 0 auto;
@@ -263,10 +306,6 @@ div#popup, div#message {
 	background-color: white;
 	border: solid 3px #1d8eea;
 	box-shadow: 0 0 5px rgba(0,0,0,0.5);
-}
-
-div#popup:not(:hover) {
-	transition: .2s;
 }
 
 div#popup h1 {
@@ -290,16 +329,12 @@ div#popup_close {
 	background-color: red;
 	background: url("../images/ex_red.jpg");
 	background-size: 100% 100%;
+	transition: .2s;
 }
 
 div#popup_close:hover {
-	transition: .2s;
 	background: url("../images/ex_blue.jpg");
 	background-color: #1d8eea;
-}
-
-div#popup_close:not(:hover) {
-	transition: .2s;
 }
 
 div#message {
