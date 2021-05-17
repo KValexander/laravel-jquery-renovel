@@ -28,6 +28,14 @@ let query = {
 		request.get(function(data) {
 			callback(data);
 		}, null, "api/moderation/main") 
-	}
+	},
+
+	// Запрос на получение справочников для страницы добавления новелл
+	novel_directory: function(callback) {
+		// Запрос
+		request.get(function(data) {
+			callback(data);
+		}, null, "api/novel/directory")
+	},
 
 };

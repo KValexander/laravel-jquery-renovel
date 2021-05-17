@@ -1,0 +1,23 @@
+<script>
+	// Проверка пользователя наличие административной роли
+	auth.moderation_check(function() {
+	});
+</script>
+
+<!-- Сайдбар -->
+<div class="sidebar">
+	<!-- Меню сайдбара -->
+	<nav>
+		<p><a onclick="route.redirect('moderation/main')">Главная</a></p>
+		<p><a onclick="route.redirect('moderation/novel_add')">Добавление новеллы</a></p>
+		<p><a onclick="route.redirect('moderation/novel')">Модерирование новелл</a></p>
+	</nav>
+</div>
+
+<!-- Страница добавления новелл -->
+<div class="novel_add">
+	<h1>Страница справочников</h1>
+</div>
+
+
+<script>height_sidebar();</script>

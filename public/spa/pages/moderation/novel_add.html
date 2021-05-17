@@ -1,0 +1,169 @@
+<script>
+	// Проверка пользователя наличие административной роли
+	auth.moderation_check(function() {
+
+		// Получение данных для формы добавления новеллы
+		query.novel_directory(function(data) {
+			console.log(data);
+
+			// Вывод разработчиков
+			for (let i = 0; i < data.data.developers.length; i++) {
+				out = `<option value="${ data.data.developers[i].developer_id }">${ data.data.developers[i].title }</option>`;
+				$("#developers").append(out);
+			}
+			// Вывод издателей
+			for (let i = 0; i < data.data.publishers.length; i++) {
+				out = `<option value="${ data.data.publishers[i].publisher_id }">${ data.data.publishers[i].title }</option>`;
+				$("#publishers").append(out);
+			}
+			// Вывод жанров
+			for (let i = 0; i < data.data.d_genres.length; i++) {
+				out = `<option value="${ data.data.d_genres[i].genre_id }">${ data.data.d_genres[i].genre }</option>`;
+				$("#d_genres").append(out);
+			}
+			// Вывод тегов
+			for (let i = 0; i < data.data.d_tags.length; i++) {
+				out = `<option value="${ data.data.d_tags[i].tag_id }">${ data.data.d_tags[i].tag }</option>`;
+				$("#d_tags").append(out);
+			}
+		});
+
+		// При добавлении новеллы
+		$("form").on("submit", function() {
+			return false;
+		});
+	});
+</script>
+
+<!-- Сайдбар -->
+<div class="sidebar">
+	<!-- Меню сайдбара -->
+	<nav>
+		<p><a onclick="route.redirect('moderation/main')">Главная</a></p>
+		<p><a onclick="route.redirect('moderation/novel')">Модерирование новелл</a></p>
+		<p><a onclick="route.redirect('moderation/directory')">Страница справочников</a></p>
+	</nav>
+</div>
+
+<!-- Страница добавления новелл -->
+<div class="moderation novel_add">
+	<h1>Добавление новеллы</h1>
+
+	<!-- Форма добавления новеллы -->
+	<form>
+
+		<!-- Добавление названий -->
+		<fieldset>
+			<legend>Добавление названий</legend>
+			<!-- Название новеллы -->
+			<input type="text" placeholder="Название новеллы" name="title">
+			<!-- Оригинальное название новеллы -->
+			<input type="text" placeholder="Оригинальное название новеллы" name="original_title">
+			<!-- Альтернативное название новеллы -->
+			<input type="text" placeholder="Альтернативное название новеллы" name="alternative_title">
+		</fieldset>
+
+		<!-- Добавление изображений -->
+		<fieldset>
+			<legend>Добавление изображений</legend>
+			<!-- Обложка новеллы -->
+			<p>Обложка новеллы</p>
+			<input type="file" name="cover">
+			<!-- Скриншоты -->
+			<p>Скриншоты</p>
+			<div class="screenshots">
+				<div class="screenshot">
+					<input type="file" class="first" name="screenshot">
+					<input type="button" class="second" value="Удалить">
+				</div>
+			</div>
+			<!-- Кнопка добавления нового скриншота -->
+			<input type="button" value="Добавить ещё скриншот">
+		</fieldset>
+
+		<!-- Добавление года релизаци и описания -->
+		<fieldset>
+			<legend>Добавление года релиза и описания</legend>
+
+			<!-- Год релиза новеллы -->
+			<input type="number" placeholder="Год релиза новеллы" name="year_release">
+
+			<!-- Описание новеллы -->
+			<textarea name="description" placeholder="Описание новеллы"></textarea>
+		</fieldset>
+
+
+		<!-- Добавление разработчика и издателя -->
+		<fieldset>
+			<legend>Добавление разработчика и издателя</legend>
+
+			<!-- Разработчик новеллы -->
+			<select name="developer_id" id="developers">
+				<option disabled selected>Разработчик новеллы</option>
+			</select>
+
+			<!-- Издатель новеллы -->
+			<select name="publisher_id" id="publishers">
+				<option disabled selected>Издатель новеллы</option>
+			</select>
+		</fieldset>
+
+		<!-- Добавление жанров и тегов -->
+		<fieldset>
+			<legend>Добавление жанров и тегов</legend>
+
+			<!-- Див для визуального отображения выбранных жанров -->
+			<div id="genres"></div>
+			<!-- Жанры новеллы -->
+			<select class="first" id="d_genres">
+				<option disabled selected>Жанры</option>
+			</select>
+			<!-- Кнопка добавления жанра -->
+			<input type="button" class="second" value="Добавить">
+
+			<!-- Див для визуального отображения выбранных тегов -->
+			<div id="tags"></div>
+			<!-- Теги новеллы -->
+			<select class="first" id="d_tags">
+				<option disabled selected>Теги</option>
+			</select>
+			<!-- Кнопка добавления тега -->
+			<input type="button" class="second" value="Добавить">
+		</fieldset>
+
+		<!-- Добавление справочников -->
+		<fieldset>
+			<legend>Добавление справочников</legend>
+
+			<!-- Тип новеллы -->
+			<select name="publisher_id" id="publishers">
+				<option disabled selected>Тип новеллы</option>
+			</select>
+
+			<!-- Продолжительность новеллы -->
+			<select name="publisher_id" id="publishers">
+				<option disabled selected>Продолжительность новеллы</option>
+			</select>
+
+			<!-- Основная платформа новеллы -->
+			<select name="publisher_id" id="publishers">
+				<option disabled selected>Основная платформа новеллы</option>
+			</select>
+
+			<!-- Страна разработчик новеллы -->
+			<select name="publisher_id" id="publishers">
+				<option disabled selected>Страна разработчик новеллы</option>
+			</select>
+
+			<!-- Язык новеллы -->
+			<select name="publisher_id" id="publishers">
+				<option disabled selected>Язык новеллы</option>
+			</select>
+
+		</fieldset>
+
+		<!-- Кнопка добавления новеллы -->
+		<input type="button" value="Страница предпросмотра">
+		<input type="submit" value="Добавить новеллу">
+	</form>
+</div>

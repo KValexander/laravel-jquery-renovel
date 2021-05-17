@@ -3,6 +3,10 @@
 	auth.moderation_check(function() {
 		// Вывод роли пользователя
 		$(".sidebar p.role b").html(auth.auth.role);
+		// Переменная для хранения данных всех пользователей;
+		let users = [];
+		// Переменная для хранения результатов поиска
+		let result = [];
 
 		// Запрос на получение данных для страницы модерации
 		query.moderation_page(function(data) {
@@ -10,42 +14,80 @@
 			// Вызов функции вывода пользователей
 			users_out(data.users);
 
+			// Запись данных пользователей в переменную
+			users = data.users;
+
 		});
 
 		// Поиск пользователей
 		$("input[type=search]").on("input", function(e) {
 			// e.target = $(this)
-			// Поиск по имени
-			// Поиск по id
-			// Поиск по 
+
+			// Если строка поиска пуста
+			if($(this).val() == "") {
+				// Вывод всех пользователей
+				return users_out(users);
+			}
+
+			// Цикл поиска данных
+			for (let i = 0; i < users.length; i++) {
+				// Поиск по id
+				// Если не использовать String, то includes не будет считать users[i].user_id текстом и откажется работать
+				if(String(users[i].user_id).includes($(this).val())) {
+					result.push(users[i]); continue;
+				}
+				// Поиск по имени пользователя
+				if(users[i].username.includes($(this).val())) {
+					result.push(users[i]); continue;
+				}
+				// Поиск по почте
+				if(users[i].email.includes($(this).val())) {
+					result.push(users[i]); continue;
+				}
+				// Поиск по логину
+				if(users[i].login.includes($(this).val())) {
+					result.push(users[i]); continue;
+				}
+			}
+
+			// Если результатов поиска нет
+			if(result.length == 0) {
+				return $("#users").html("<h3>Пользователи не найдены</h3>");
+			}
+
+			// Вывод результатов поиска
+			users_out(result);
+			// Очистка массива результатов поиска
+			result = [];
+
 		});
 	});
 
 	// Функция вывода пользователей
 	function users_out(data) {
-		console.log(data);
 
 		// Очистка переменной
 		out = `
 			<div class="user">
 				<div class="head">
 					<div>id</div>
-					<div>username</div>
-					<div>email</div>
-					<div>login</div>
+					<div>Имя пользователя</div>
+					<div>Email</div>
+					<div>Логин</div>
+					<div>Действия</div>
 				</div>`;
 
 		// Конкатинация данных
 		for(let val in data) {
 			out += `
 					<div class="body">
-						<div class="id"></div>
-						<div class="username"></div>
-						<div class="email"></div>
-						<div class="login"></div>
+						<div class="id">${ data[val].user_id }</div>
+						<div class="username">${ data[val].username }</div>
+						<div class="email">${ data[val].email }</div>
+						<div class="login">${ data[val].login }</div>
+						<div class="do">Отсутствуют</div>
 					</div>
 			`;
-			console.log(data[val]);
 		}
 
 		out += `</div>`;
@@ -59,9 +101,9 @@
 <div class="sidebar">
 	<!-- Меню сайдбара -->
 	<nav>
-		<p><a>Страница справочников</a></p>
-		<p><a>Модерирование новелл</a></p>
-		<p><a>Добавить новеллу</a></p>
+		<p><a onclick="route.redirect('moderation/novel_add')">Добавление новеллы</a></p>
+		<p><a onclick="route.redirect('moderation/novel')">Модерирование новелл</a></p>
+		<p><a onclick="route.redirect('moderation/directory')">Страница справочников</a></p>
 	</nav>
 </div>
 
@@ -73,11 +115,10 @@
 	<h2>Пользователи</h2>
 	<!-- Поиск пользователей -->
 	<div class="search">
-		<input type="search" placeholder="Введите id/имя/email/логин пользователя">
+		<input type="search" placeholder="Для поиска введите id/имя/email/логин пользователя">
 	</div>
 	<!-- Вывод информации о пользователях -->
-	<div id="users">
-	</div>
+	<div id="users"></div>
 </div>
 
 <script>height_sidebar();</script>

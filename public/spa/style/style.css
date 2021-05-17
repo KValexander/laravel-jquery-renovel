@@ -75,12 +75,18 @@ div#app div.sidebar {
 	margin-left: 30px;
 }
 
-input {
+input, select, textarea {
 	height: 40px;
 	font-size: 14pt;
 	padding-left: 5px;
 	border: solid 1px black;
 	font-family: GardensCMRegular;
+}
+
+input[type=file] {
+	border: none;
+	height: 35px;
+	border-bottom: solid 2px black;
 }
 
 input[type=button], input[type=submit] {
@@ -91,7 +97,7 @@ input[type=button], input[type=submit] {
 	background-color: #1d8eea;
 }
 
-form input {
+form input, form select, form textarea {
 	width: 100%;
 	margin: 10px 0;
 }
@@ -105,6 +111,26 @@ form input.error {
 form input.error[type=button], form input.error[type=submit] {
 	box-shadow: none;
 	border: none;
+}
+
+form fieldset {
+	padding: 10px;
+	margin: 10px 0;
+	border: solid 2px #1d8eea;
+}
+
+form textarea {
+	padding: 5px;
+	font-size: 14pt;
+	font-family: GardensCMRegular;
+}
+
+form input.first, form select.first {
+	width: 70%;
+}
+
+form input.second, form select.second {
+	width: calc(30% - 10px);
 }
 
 /* Стили шапки сайта
@@ -191,7 +217,6 @@ div.sidebar nav p {
 
 div.sidebar nav p:hover {
 	border-right: solid 5px #ff9a0f;
-	border-left: solid 3px #ff9a0f;
 	background-color: #fcfcfc;
 	color: white;
 }
@@ -253,13 +278,35 @@ div.moderation div.search input[type=search]{
 div.moderation div#users {
 	width: 100%;
 	min-height: 10px;
-	border: solid 1px black;
+	/*border: solid 1px black;*/
 }
 
 div.moderation div#users div.user {
 	overflow: hidden;
+	text-align: center;
 }
 
+div.moderation div#users div.user div.head {
+	font-weight: bold;
+}
+div.moderation div#users div.user div.head div,
+div.moderation div#users div.user div.body div {
+	display: inline-block;
+	margin: 0;
+	margin: 5px 0;
+	border-bottom: solid 2px black;
+	padding: 10px;
+	width: 23%;
+}
+div.moderation div#users div.user div.head div:first-child,
+div.moderation div#users div.user div.body div:first-child {
+	width: 4%;
+}
+
+/* Страница добавления новеллы */
+div.user_add form {
+
+}
 
 /* Стили pop-up модулей
 ==============================*/
