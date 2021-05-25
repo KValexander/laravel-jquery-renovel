@@ -3,7 +3,7 @@ class Route {
 
 	// Метод инициализации класса
 	constructor(path_to_file, expansion) {
-		// Путь до папки с фалами и расширение файлов
+		// Путь до папки с файлами и расширение файлов
 		this.path_to_file = path_to_file;
 		this.expansion = expansion;
 	}
